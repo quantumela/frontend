@@ -13,6 +13,20 @@ def render_employee_v2():
     mode = st.sidebar.radio("🌐 Who are you?", ["Developer Admin", "Developer"])
 
     if mode == "Developer Admin":
+        # 🔐 Password protection
+        if "admin_authenticated" not in st.session_state:
+            st.session_state.admin_authenticated = False
+
+        if not st.session_state.admin_authenticated:
+            password = st.sidebar.text_input("🔐 Enter Admin Password", type="password")
+            if password == "test":  # 🔁 Change this to your real password
+                st.session_state.admin_authenticated = True
+                st.success("✅ Access granted.")
+            else:
+                st.warning("⚠️ Incorrect password or empty field.")
+                return
+
+        # 🛠️ Admin panel
         st.sidebar.subheader("🛠️ Developer Admin Setup")
 
         mapping_file = st.sidebar.file_uploader("Upload Mapping Sheet (.xlsx)", type=["xlsx"])
