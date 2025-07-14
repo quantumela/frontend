@@ -66,6 +66,18 @@ section.main > div, .block-container {
 </style>
 """, unsafe_allow_html=True)
 
+st.markdown("""
+<style>
+/* Force sidebar toggle button to always be visible */
+[data-testid="collapsedControl"] {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: all !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
 # ✅ Background image setup
 def set_background(image_file):
     with open(image_file, "rb") as f:
