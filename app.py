@@ -23,6 +23,21 @@ sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 
 # ✅ Page setup
 st.set_page_config(layout="wide", page_title="MVS", page_icon="📊")
+# 👇 Force sidebar collapse control to always show
+st.markdown("""
+<style>
+[data-testid="collapsedControl"] {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: all !important;
+    position: fixed !important;
+    bottom: 2rem !important;
+    left: 1.5rem !important;
+    z-index: 9999 !important;
+}
+</style>
+""", unsafe_allow_html=True)
 
 # ✅ CSS styling (light/dark mode fix + banner)
 st.markdown("""
