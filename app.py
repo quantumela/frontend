@@ -315,7 +315,7 @@ elif selected == "Launch Demo":
             "Employee Data",
             "pd_demo",
             "- Personal Info\n- Employment Info\n- Compensation Info\n- Time Info\n...",
-            next_page="employee_data_tool"
+            next_page="employee_data_v2"
         )
 
 
