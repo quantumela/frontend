@@ -81,13 +81,23 @@ def render_employee_v2():
             st.subheader("📊 Migration Statistics")
             col1, col2 = st.columns([2, 2])
             with col1:
-                pie = px.pie(stats_df, names='Metric', values='Value', color='Metric',
-                            color_discrete_map={"Success Columns": "green", "Missing Columns": "orange", "Error Columns": "red"})
+                pie = px.pie(
+                    stats_df[stats_df["Metric"].isin(["Success Columns", "Missing Columns"])],
+                    names='Metric',
+                    values='Value',
+                    color='Metric',
+                    color_discrete_map={
+                        "Success Columns": "green",
+                        "Missing Columns": "orange"
+                    }
+                )
                 pie.update_layout(height=300, width=300, margin=dict(t=20, b=20, l=0, r=0))
                 st.plotly_chart(pie, use_container_width=False)
+            
             with col2:
-                selected = st.selectbox("🔍 Drilldown Issues", ["Missing Columns", "Error Columns"])
-                st.dataframe(validation_df[validation_df["Status"] == selected.split()[0]])
+                selected = st.selectbox("🔍 Drilldown Issues", ["Missing Columns"])
+                st.dataframe(validation_df[validation_df["Status"] == "Missing"])
+
 
         except Exception as e:
             st.error("❌ Error during transformation")
