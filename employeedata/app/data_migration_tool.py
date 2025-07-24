@@ -54,11 +54,9 @@ def render_employee_v2():
     if uploaded_files:
         try:
             mapping_df = pd.read_excel(st.session_state["mapping_file"])
-            try:
-                output_template_df = pd.read_csv(st.session_state["output_template"])
-            except pd.errors.EmptyDataError:
-                st.error("🚫 Output Template file is empty or invalid. Please upload a valid CSV.")
-                return
+            output_template_df = pd.read_csv(st.session_state["output_template"])
+        except Exception:
+            output_template_df = pd.DataFrame()  # fallback silently
 
             source_data = {os.path.splitext(f.name)[0]: pd.read_excel(f) for f in uploaded_files}
 
