@@ -55,7 +55,7 @@ def render_employee_v2():
         try:
             mapping_df = pd.read_excel(st.session_state["mapping_file"])
             try:
-                output_template_df = pd.read_csv(st.session_state["output_template"], header=[0, 1])
+                output_template_df = pd.read_csv(st.session_state["output_template"])
             except pd.errors.EmptyDataError:
                 st.error("🚫 Output Template file is empty or invalid. Please upload a valid CSV.")
                 return
