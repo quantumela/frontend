@@ -54,7 +54,12 @@ def render_employee_v2():
     if uploaded_files:
         try:
             mapping_df = pd.read_excel(st.session_state["mapping_file"])
-            output_template_df = pd.read_csv(st.session_state["output_template"], header=[0, 1])
+            try:
+                output_template_df = pd.read_csv(st.session_state["output_template"], header=[0, 1])
+            except pd.errors.EmptyDataError:
+                st.error("🚫 Output Template file is empty or invalid. Please upload a valid CSV.")
+                return
+
             source_data = {os.path.splitext(f.name)[0]: pd.read_excel(f) for f in uploaded_files}
 
             picklists = {}
