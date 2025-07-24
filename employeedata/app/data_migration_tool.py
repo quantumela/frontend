@@ -54,9 +54,19 @@ def render_employee_v2():
     if uploaded_files:
         try:
             mapping_df = pd.read_excel(st.session_state["mapping_file"])
-            output_template_df = pd.read_csv(st.session_state["output_template"])
-        except Exception:
-            output_template_df = pd.DataFrame()  # fallback silently
+    
+            output_template = st.session_state.get("output_template", None)
+            output_template_df = pd.read_csv(output_template) if output_template else pd.DataFrame()
+    
+            # If it loaded but is empty, skip processing
+            if output_template_df.empty:
+                st.warning("⚠️ Output Template is empty. Skipping transformation.")
+                return
+    
+        except Exception as e:
+            st.warning(f"⚠️ Skipping output template processing due to unexpected issue.")
+            output_template_df = pd.DataFrame()
+            return
 
             source_data = {os.path.splitext(f.name)[0]: pd.read_excel(f) for f in uploaded_files}
 
