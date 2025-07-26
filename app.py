@@ -176,7 +176,7 @@ if selected == "Home":
         </style>
 
         <div class="full-width-banner">
-            Effortless Data Migration, Done Right<br>
+            Effortless Data Mig, Done Right<br>
             <span style="font-size: 1.4rem; font-weight: normal;">MVS (Migration & Validation Suite)</span>
         </div>
     """, unsafe_allow_html=True)
